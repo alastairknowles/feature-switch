@@ -36,7 +36,7 @@ public class ReleaseDto {
 		this.features = features;
 	}
 
-	public class FeaturesDto {
+	public static class FeaturesDto {
 
 		private List<String> inclusions = new ArrayList<>();
 

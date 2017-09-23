@@ -20,7 +20,11 @@ public class FeatureSwitch extends BaseEntity {
 	@Column(name = "feature", nullable = false)
 	private String feature;
 
-	// Features can be included / excluded globally by making records with no company / group / user
+	// Global flag for stuff that is turned on / off for everybody
+	// Company / group / user all null expresses the same thing - this just simplifies implementation
+	@Column(name = "global")
+	private Boolean global;
+
 	@Column(name = "company_id")
 	private Long companyId;
 
@@ -33,6 +37,62 @@ public class FeatureSwitch extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "state", nullable = false)
 	private State state;
+
+	public Release getRelease() {
+		return release;
+	}
+
+	public void setRelease(Release release) {
+		this.release = release;
+	}
+
+	public String getFeature() {
+		return feature;
+	}
+
+	public void setFeature(String feature) {
+		this.feature = feature;
+	}
+
+	public Boolean getGlobal() {
+		return global;
+	}
+
+	public void setGlobal(Boolean global) {
+		this.global = global;
+	}
+
+	public Long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
 
 	// For any release, it's likely most features will ship, so all we need to do is wrap those at risk
 	// Relaxed customers are likely to welcome change, so might want to 'include' experimental features

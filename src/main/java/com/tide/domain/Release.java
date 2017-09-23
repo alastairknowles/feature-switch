@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +15,7 @@ public class Release extends BaseEntity {
 	@Column(name = "version", nullable = false, unique = true)
 	private String version;
 
+	@OneToMany(mappedBy = "release")
 	private Set<FeatureSwitch> featureSwitches = new HashSet<>();
 
 	public String getVersion() {
