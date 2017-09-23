@@ -1,0 +1,22 @@
+# EditorConfig: http://EditorConfig.org
+
+# Top-most EditorConfig file
+root = true
+
+# Defaults for all editor files
+[*]
+indent_style = tab
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Rules for YAML files
+[*.{yaml,yml}]
+# The YAML spec doesn't allow indenting using tabs
+indent_style = space
+# The YAML spec documentation uses 2 spaces and most other projects follow this convention
+indent_size = 2
+charset = utf-8
+
+# Java file encoding
+[*.java]
+charset = utf-8
