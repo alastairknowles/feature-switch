@@ -1,6 +1,7 @@
 package com.tide.service;
 
 import com.tide.domain.FeatureSwitch;
+import com.tide.domain.Release;
 import com.tide.repository.FeatureSwitchRepository;
 import com.tide.rest.ReleaseDto;
 
@@ -17,13 +18,17 @@ public class FeatureSwitchService {
 
 	private FeatureSwitchRepository featureSwitchRepository;
 
-	public FeatureSwitchService(FeatureSwitchRepository featureSwitchRepository) {
+	private ReleaseService releaseService;
+
+	public FeatureSwitchService(FeatureSwitchRepository featureSwitchRepository, ReleaseService releaseService) {
 		this.featureSwitchRepository = featureSwitchRepository;
+		this.releaseService = releaseService;
 	}
 
-	public ReleaseDto getReleaseMetadata(long releaseId, Long companyId, Long groupId, Long userId) {
+	public ReleaseDto getReleaseMetadata(String version, Long companyId, Long groupId, Long userId) {
+		Release release = releaseService.getByVersion(version);
 		List<FeatureSwitch> featureSwitches =
-				featureSwitchRepository.getFeatureSwitches(releaseId, companyId, groupId, userId);
+				featureSwitchRepository.getFeatureSwitches(release, companyId, groupId, userId);
 		Map<String, FeatureSwitch> featureSwitchesIndex = new HashMap<>();
 
 		// Filter out duplicates
@@ -35,12 +40,8 @@ public class FeatureSwitchService {
 		}
 
 		// Build the response
-		ReleaseDto releaseDto = new ReleaseDto();
+		ReleaseDto releaseDto = new ReleaseDto(release.getVersion(), release.getCreatedTimestamp());
 		for (FeatureSwitch featureSwitch : featureSwitchesIndex.values()) {
-			if (releaseDto.getVersion() == null) {
-				releaseDto.setVersion(featureSwitch.getRelease().getVersion());
-			}
-
 			ReleaseDto.FeaturesDto featuresDto = releaseDto.getFeatures();
 			if (featuresDto == null) {
 				featuresDto = new ReleaseDto.FeaturesDto();

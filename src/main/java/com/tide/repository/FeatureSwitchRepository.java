@@ -1,6 +1,7 @@
 package com.tide.repository;
 
 import com.tide.domain.FeatureSwitch;
+import com.tide.domain.Release;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -15,10 +16,10 @@ import javax.persistence.criteria.Root;
 public interface FeatureSwitchRepository extends CrudRepository<FeatureSwitch, Long>,
 		JpaSpecificationExecutor<FeatureSwitch> {
 
-	default List<FeatureSwitch> getFeatureSwitches(long releaseId, Long companyId, Long groupId, Long userId) {
+	default List<FeatureSwitch> getFeatureSwitches(Release release, Long companyId, Long groupId, Long userId) {
 		return findAll((root, query, criteriaBuilder) -> {
 			// Match the release
-			Predicate predicate = criteriaBuilder.equal(root.get("release.id"), releaseId);
+			Predicate predicate = criteriaBuilder.equal(root.get("release"), release);
 
 			// Find global switches
 			Predicate globalPredicate = criteriaBuilder.isNotNull(root.get("global"));

@@ -1,5 +1,8 @@
 package com.tide.rest;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,13 @@ public class ReleaseDto {
 	private LocalDateTime createdTimestamp;
 
 	private FeaturesDto features;
+
+	@JsonCreator
+	public ReleaseDto(@JsonProperty("version") String version,
+	                  @JsonProperty("createdTimestamp") LocalDateTime createdTimestamp) {
+		this.version = version;
+		this.createdTimestamp = createdTimestamp;
+	}
 
 	public String getVersion() {
 		return version;
