@@ -9,7 +9,7 @@ CREATE TABLE release (
 	COLLATE = utf8_general_ci
 	ENGINE = innodb;
 
-CREATE TABLE feature (
+CREATE TABLE feature_switch (
 	id                BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	release_id        BIGINT          NOT NULL,
 	feature           VARCHAR(255)    NOT NULL,

@@ -14,7 +14,7 @@ public class Release extends BaseEntity {
 	@Column(name = "version", nullable = false, unique = true)
 	private String version;
 
-	private Set<Feature> features = new HashSet<>();
+	private Set<FeatureSwitch> featureSwitches = new HashSet<>();
 
 	public String getVersion() {
 		return version;
@@ -24,8 +24,8 @@ public class Release extends BaseEntity {
 		this.version = version;
 	}
 
-	public Set<Feature> getFeatures() {
-		return features;
+	public Set<FeatureSwitch> getFeatureSwitches() {
+		return featureSwitches;
 	}
 
 }

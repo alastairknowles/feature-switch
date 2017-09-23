@@ -10,8 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "feature", uniqueConstraints = @UniqueConstraint(columnNames = {"release_id", "feature"}))
-public class Feature extends BaseEntity {
+@Table(name = "feature_switch", uniqueConstraints = @UniqueConstraint(columnNames = {"release_id", "feature"}))
+public class FeatureSwitch extends BaseEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "release_id", nullable = false)
