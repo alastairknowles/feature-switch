@@ -40,7 +40,7 @@ public class FeatureSwitchController {
 	// Assume we know company and group for user after login
 	// Probably users could be assigned to multiple groups - worry about that if it happens
 	// Maybe there is a public component to the app for which all values would be null - assume that is supported
-	@GetMapping("/release-metadata/{version}")
+	@GetMapping("/release-metadata/{version:.+}")
 	public ReleaseDto getReleaseMetadata(@PathVariable("version") String version,
 	                                     @RequestParam(name = "companyId", required = false) Long companyId,
 	                                     @RequestParam(value = "groupId", required = false) Long groupId,
