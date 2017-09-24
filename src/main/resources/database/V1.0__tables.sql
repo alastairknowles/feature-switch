@@ -22,7 +22,7 @@ CREATE TABLE feature_switch (
 	created_timestamp DATETIME        NOT NULL,
 	updated_timestamp DATETIME,
 	PRIMARY KEY (id),
-	UNIQUE INDEX (release_id, feature, 'force', global, company_id, group_id, user_id),
+	UNIQUE INDEX (release_id, feature, `force`, global, company_id, group_id, user_id),
 	FOREIGN KEY (release_id) REFERENCES `release` (id)
 )
 	COLLATE = utf8_general_ci

@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 @AutoConfigureMockMvc
@@ -53,9 +54,7 @@ public class FeatureSwitchControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andReturn().getResponse().getContentAsString();
 
-		String expectedResponse = FileUtils.readFileToString(
-				applicationContext.getResource("classpath:response/featureSwitches.json").getFile(),
-				StandardCharsets.UTF_8).trim();
+		String expectedResponse = readResourceFile("classpath:response/featureSwitches.json");
 		Assert.assertEquals(expectedResponse, actualResponse);
 	}
 
@@ -69,10 +68,13 @@ public class FeatureSwitchControllerTest {
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andReturn().getResponse().getContentAsString();
 
-		String expectedResponse = FileUtils.readFileToString(
-				applicationContext.getResource("classpath:response/featureSwitchesUser.json").getFile(),
-				StandardCharsets.UTF_8).trim();
+		String expectedResponse = readResourceFile("classpath:response/featureSwitchesUser.json");
 		Assert.assertEquals(expectedResponse, actualResponse);
+	}
+
+	private String readResourceFile(String path) throws IOException {
+		return FileUtils.readFileToString(
+				applicationContext.getResource(path).getFile(), StandardCharsets.UTF_8).trim();
 	}
 
 }
