@@ -1,0 +1,20 @@
+INSERT INTO release (id, version, created_timestamp)
+VALUES
+	(1, '1.0', NOW()),
+	(2, '1.1', NOW() + INTERVAL 1 WEEK);
+
+INSERT INTO feature_switch (id, release_id, feature, force, global, company_id, group_id, user_id, state, created_timestamp)
+VALUES
+	(1, 1, 'XERO_INTEGRATION', NULL, 1, NULL, NULL, NULL, 'EXCLUDE', NOW()),
+	(1, 1, 'XERO_INTEGRATION', NULL, NULL, 1, NULL, NULL, 'INCLUDE', NOW()),
+	(1, 1, 'HSBC_INTEGRATION', NULL, NULL, 1, NULL, NULL, 'INCLUDE', NOW()),
+	(1, 1, 'HSBC_INTEGRATION', NULL, NULL, NULL, 1, NULL, 'EXCLUDE', NOW()),
+	(1, 1, 'MOBILE_ACCOUNTS', NULL, NULL, NULL, 1, NULL, 'EXCLUDE', NOW()),
+	(1, 1, 'MOBILE_ACCOUNTS', NULL, NULL, NULL, NULL, 1, 'INCLUDE', NOW()),
+	(1, 1, 'SPEND_FORECASTING', NULL, NULL, NULL, NULL, 1, 'INCLUDE', NOW()),
+	(1, 1, 'EASY_TAX', NULL, 1, NULL, 1, NULL, 'INCLUDE', NOW()),
+	(1, 1, 'EASY_TAX', 1, NULL, 1, NULL, NULL, 'EXCLUDE', NOW()),
+	(1, 2, 'XERO_INTEGRATION', NULL, 1, NULL, NULL, NULL, 'EXCLUDE', NOW()),
+	(1, 2, 'XERO_INTEGRATION', NULL, NULL, 1, NULL, NULL, 'INCLUDE', NOW()),
+	(1, 1, 'HSBC_INTEGRATION', NULL, NULL, 2, NULL, NULL, 'INCLUDE', NOW()),
+	(1, 1, 'HSBC_INTEGRATION', NULL, NULL, NULL, 2, NULL, 'EXCLUDE', NOW());

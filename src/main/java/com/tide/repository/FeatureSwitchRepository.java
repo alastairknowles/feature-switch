@@ -47,7 +47,7 @@ public interface FeatureSwitchRepository extends CrudRepository<FeatureSwitch, L
 
 			return criteriaBuilder.and(predicate, criteriaBuilder.or(globalPredicate, scopedPredicate));
 			// Scopes envelope one another, order descending by order of precedence, so we get priority first
-		}, new Sort(Sort.Direction.DESC, "global", "companyId", "groupId", "userId"));
+		}, new Sort(Sort.Direction.DESC, "force", "global", "companyId", "groupId", "userId"));
 	}
 
 	default Predicate createOrAppendToScopedPredicate(CriteriaBuilder criteriaBuilder, Root<FeatureSwitch> root,

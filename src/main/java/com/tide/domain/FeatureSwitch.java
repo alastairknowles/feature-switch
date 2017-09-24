@@ -20,8 +20,14 @@ public class FeatureSwitch extends BaseEntity {
 	@Column(name = "feature", nullable = false)
 	private String feature;
 
+	// We have to have a priority order for scopes (global -> company -> group -> user)
+	// But there will be scenarios where we need to reverse the order - force flag supports that
+	@Column(name = "force")
+	private Boolean force;
+
 	// Global flag for stuff that is turned on / off for everybody
 	// Company / group / user all null expresses the same thing - this just simplifies implementation
+	// Should never be used in conjunction with
 	@Column(name = "global")
 	private Boolean global;
 
@@ -52,6 +58,14 @@ public class FeatureSwitch extends BaseEntity {
 
 	public void setFeature(String feature) {
 		this.feature = feature;
+	}
+
+	public Boolean getForce() {
+		return force;
+	}
+
+	public void setForce(Boolean force) {
+		this.force = force;
 	}
 
 	public Boolean getGlobal() {
