@@ -53,12 +53,10 @@ public interface FeatureSwitchRepository extends CrudRepository<FeatureSwitch, L
 	default Predicate createOrAppendToScopedPredicate(CriteriaBuilder criteriaBuilder, Root<FeatureSwitch> root,
 	                                                  Predicate existingPredicate, String property, Long value) {
 		if (existingPredicate == null) {
-			existingPredicate = criteriaBuilder.equal(root.get(property), value);
+			return criteriaBuilder.equal(root.get(property), value);
 		} else {
-			criteriaBuilder.or(existingPredicate, criteriaBuilder.equal(root.get(property), value));
+			return criteriaBuilder.or(existingPredicate, criteriaBuilder.equal(root.get(property), value));
 		}
-
-		return existingPredicate;
 	}
 
 }

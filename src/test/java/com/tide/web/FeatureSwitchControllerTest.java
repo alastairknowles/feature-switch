@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
+import java.nio.charset.StandardCharsets;
 
 @AutoConfigureMockMvc
 @ActiveProfiles("TEST")
@@ -42,6 +42,7 @@ public class FeatureSwitchControllerTest {
 				MockMvcRequestBuilders.get(SERVLET_PATH + "/0.9"))
 				.andExpect(MockMvcResultMatchers.status().isNotFound())
 				.andReturn().getResponse().getContentAsString();
+
 		Assert.assertTrue(actualResponse.contains("\"explanation\" : \"Release: 0.9 does not exist\""));
 	}
 
@@ -53,20 +54,25 @@ public class FeatureSwitchControllerTest {
 				.andReturn().getResponse().getContentAsString();
 
 		String expectedResponse = FileUtils.readFileToString(
-				applicationContext.getResource("classpath:response/featureSwitches.json").getFile(), UTF_8).trim();
+				applicationContext.getResource("classpath:response/featureSwitches.json").getFile(),
+				StandardCharsets.UTF_8).trim();
 		Assert.assertEquals(expectedResponse, actualResponse);
 	}
 
 	@Test
-	public void shouldReturnExpectedFeatureSwitchesForUser() throws Exception {
-		String response = mockMvc.perform(
+	public void shouldReturnExpectedFeatureSwitchesUser() throws Exception {
+		String actualResponse = mockMvc.perform(
 				MockMvcRequestBuilders.get(SERVLET_PATH + "/1.0")
 						.param("companyId", "1")
 						.param("groupId", "1")
 						.param("userId", "1"))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andReturn().getResponse().getContentAsString();
-		Assert.assertNotNull(response);
+
+		String expectedResponse = FileUtils.readFileToString(
+				applicationContext.getResource("classpath:response/featureSwitchesUser.json").getFile(),
+				StandardCharsets.UTF_8).trim();
+		Assert.assertEquals(expectedResponse, actualResponse);
 	}
 
 }

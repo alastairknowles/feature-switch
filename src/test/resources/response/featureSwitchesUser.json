@@ -1,0 +1,8 @@
+{
+  "version" : "1.0",
+  "createdTimestamp" : "2017-08-01T09:00:00",
+  "features" : {
+    "inclusions" : [ "SPEND_FORECASTING", "HSBC_INTEGRATION" ],
+    "exclusions" : [ "XERO_INTEGRATION", "EASY_TAX", "MOBILE_ACCOUNTS" ]
+  }
+}

@@ -1,3 +1,9 @@
+DELETE FROM feature_switch;
+ALTER TABLE feature_switch ALTER COLUMN id RESTART WITH 1;
+
+DELETE FROM release;
+ALTER TABLE release ALTER COLUMN id RESTART WITH 1;
+
 INSERT INTO release (id, version, created_timestamp)
 VALUES
 	(1, '1.0', '2017-08-01 09:00:00'),
