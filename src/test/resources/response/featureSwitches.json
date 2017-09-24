@@ -1,0 +1,8 @@
+{
+  "version" : "1.0",
+  "createdTimestamp" : "2017-08-01T09:00:00",
+  "features" : {
+    "inclusions" : [ "EASY_TAX" ],
+    "exclusions" : [ "XERO_INTEGRATION" ]
+  }
+}
