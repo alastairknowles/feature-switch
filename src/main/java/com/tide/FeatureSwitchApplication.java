@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -45,6 +46,7 @@ public class FeatureSwitchApplication extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
+	@Profile("!TEST")
 	public DataSource dataSource() {
 		LOGGER.info("Creating datasource using: " + databaseHost);
 
@@ -67,6 +69,7 @@ public class FeatureSwitchApplication extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
+	@Profile("!TEST")
 	public Flyway flyway(DataSource dataSource) {
 		Flyway flyway = new Flyway();
 		flyway.setDataSource(dataSource);
@@ -76,6 +79,7 @@ public class FeatureSwitchApplication extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
+	@Profile("!TEST")
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 		sessionFactoryBean.setDataSource(dataSource());

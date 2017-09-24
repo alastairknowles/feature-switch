@@ -5,12 +5,15 @@ import com.tide.TestFeatureSwitchApplication;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @AutoConfigureMockMvc
 @ActiveProfiles("TEST")
@@ -20,15 +23,15 @@ import org.springframework.test.web.servlet.MockMvc;
 		classes = {FeatureSwitchApplication.class, TestFeatureSwitchApplication.class})
 public class FeatureSwitchControllerTest {
 
+	private static final String SERVLET_PATH = "/feature-switch/release-metadata";
+
+	@Autowired
 	private MockMvc mockMvc;
 
-	public FeatureSwitchControllerTest(MockMvc mockMvc) {
-		this.mockMvc = mockMvc;
-	}
-
 	@Test
-	public void shouldReturn404ForInvalidVersion() {
-		
+	public void shouldReturn404ForInvalidVersion() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get(SERVLET_PATH + "/0.9"))
+				.andExpect(MockMvcResultMatchers.status().isNotFound());
 	}
 
 	@Test

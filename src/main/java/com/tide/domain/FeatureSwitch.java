@@ -10,7 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "feature_switch", uniqueConstraints = @UniqueConstraint(columnNames = {"release_id", "feature"}))
+@Table(name = "feature_switch", uniqueConstraints = @UniqueConstraint(
+		columnNames = {"release_id", "feature", "force", "company_id", "group_id", "user_id"}))
 public class FeatureSwitch extends BaseEntity {
 
 	@ManyToOne
@@ -34,10 +35,10 @@ public class FeatureSwitch extends BaseEntity {
 	@Column(name = "company_id")
 	private Long companyId;
 
-	@Column(name = "groupId")
+	@Column(name = "group_id")
 	private Long groupId;
 
-	@Column(name = "userId")
+	@Column(name = "user_id")
 	private Long userId;
 
 	@Enumerated(EnumType.STRING)
